@@ -77,6 +77,14 @@ source .venv/bin/activate
 python3 -m src.run_cp1
 ```
 
+Минимальный запуск через Docker:
+
+```bash
+docker compose up --build
+```
+
+Для Docker-запуска raw CSV-файлы также должны лежать в `data/raw/`.
+
 Что делает `python3 -m src.run_cp1`:
 - `Этап 1 — preprocessing` -> очищает raw-данные, приводит цены и даты к нормальному виду, собирает итоговые таблицы в `data/processed/`
 - `Этап 2 — eda` -> считает summary по итоговому датасету и сохраняет графики в `report/images/`

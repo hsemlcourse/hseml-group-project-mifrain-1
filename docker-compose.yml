@@ -1,0 +1,7 @@
+services:
+  cp1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /app
+    command: python3 -m src.run_cp1
