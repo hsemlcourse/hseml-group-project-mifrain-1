@@ -1,0 +1,52 @@
+{
+  "primary_metric": "mae",
+  "best_model_name": "hist_gradient_boosting",
+  "feature_columns": [
+    "dataset_part",
+    "brand",
+    "model",
+    "brand_model",
+    "model_year",
+    "snapshot_year",
+    "snapshot_month",
+    "vehicle_age",
+    "variant_token_count",
+    "variant_char_length",
+    "brand_name_length",
+    "model_name_length",
+    "is_new_listing",
+    "has_automatic",
+    "has_manual",
+    "has_turbo",
+    "has_coupe",
+    "has_suv",
+    "has_hybrid",
+    "has_electric",
+    "has_cabrio",
+    "has_hatchback"
+  ],
+  "split_summary": {
+    "strategy": "chronological split by snapshot_date",
+    "train_end": "2022-09-06",
+    "val_end": "2022-12-18",
+    "rows": {
+      "train": 7160,
+      "val": 1915,
+      "test": 2032
+    },
+    "date_ranges": {
+      "train": [
+        "2014-08-01",
+        "2022-09-06"
+      ],
+      "val": [
+        "2022-09-08",
+        "2022-12-18"
+      ],
+      "test": [
+        "2022-12-19",
+        "2023-03-27"
+      ]
+    }
+  }
+}

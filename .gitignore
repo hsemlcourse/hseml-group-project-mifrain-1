@@ -46,6 +46,7 @@ data/processed/*.parquet
 data/processed/*.pkl
 data/processed/*.npy
 data/processed/*.npz
+data/processed/.matplotlib/
 
 # Keep directory structure
 !data/raw/.gitkeep
