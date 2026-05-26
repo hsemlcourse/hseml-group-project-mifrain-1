@@ -1,0 +1,17 @@
+.git
+.venv
+__pycache__/
+.pytest_cache/
+.cache/
+*.pyc
+*.log
+
+data/raw/
+data/processed/
+report/
+presentation/
+tests/
+
+models/*
+!models/best_model.joblib
+!models/best_model_info.json

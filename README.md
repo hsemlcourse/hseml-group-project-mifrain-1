@@ -11,7 +11,8 @@
 2. [Структура репозитория](#структура-репозитория)
 3. [Запуски](#быстрый-старт)
 4. [Данные](#данные)
-5. [Результаты](#результаты)
+5. [Деплой CP3](#деплой-cp3)
+6. [Результаты](#результаты)
 7. [Отчёт](#отчёт)
 
 
@@ -41,6 +42,9 @@
 │   ├── images                  # Графики EDA
 │   └── report.md               # Отчёт по проекту
 ├── src
+│   ├── api.py                 # FastAPI API для инференса
+│   ├── prediction.py          # Загрузка модели и подготовка признаков
+│   ├── ui.py                  # Streamlit-интерфейс
 │   ├── preprocessing.py        # Предобработка и сбор итогового датасета
 │   ├── eda.py                  # EDA и сохранение визуализаций
 │   ├── modeling.py             # Обучение baseline и экспериментальных моделей
@@ -83,7 +87,7 @@ python3 -m src.run_cp1
 docker compose up --build
 ```
 
-Для Docker-запуска raw CSV-файлы также должны лежать в `data/raw/`.
+На этапе CP3 `docker compose up --build` поднимает API и UI. Для повторного обучения raw CSV-файлы также должны лежать в `data/raw/`.
 
 Что делает `python3 -m src.run_cp1`:
 - `Этап 1 — preprocessing` -> очищает raw-данные, приводит цены и даты к нормальному виду, собирает итоговые таблицы в `data/processed/`
@@ -97,6 +101,42 @@ docker compose up --build
 source .venv/bin/activate
 pytest -q
 flake8 src tests --max-line-length=120
+```
+
+## Деплой CP3
+
+Для третьего чекпоинта реализован локальный деплой:
+
+- FastAPI API: `src/api.py`
+- Streamlit UI: `src/ui.py`
+- инференс-слой: `src/prediction.py`
+- контейнеризация: `Dockerfile` и `docker-compose.yml`
+
+Запуск:
+
+```bash
+docker compose up --build
+```
+
+После старта доступны:
+
+- API health-check: <http://127.0.0.1:8000/health>
+- Swagger UI: <http://127.0.0.1:8000/docs>
+- пользовательский интерфейс: <http://127.0.0.1:8501>
+
+Пример API-запроса:
+
+```bash
+curl -X POST http://127.0.0.1:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{
+    "dataset_part": "used",
+    "brand": "BMW",
+    "model": "X5",
+    "trim_or_variant": "BMW X5 2020 A/T Turbo SUV",
+    "model_year": 2020,
+    "snapshot_date": "2023-03-27"
+  }'
 ```
 
 ## Данные
